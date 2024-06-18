@@ -1,0 +1,33 @@
+<html>
+    <header>
+        <script>
+            let socket = new WebSocket("http://localhost:8080/chat");
+            socket.onopen = function (event) {
+                socket.send("Hello World!");
+            }
+            socket.onmessage = function (event) {
+                alert(event.data);
+            }
+            socket.onclose = function (event) {
+                alert("Connection closed");
+            }
+
+            function sendMessage() {
+                let message = document.getElementById("message").value;
+                if (socket.readyState === WebSocket.OPEN) {
+                    socket.send(message);
+                }
+                else {
+                    alert("Data summit error, probably connection is closed");
+                }
+            }
+        </script>
+
+        <title>Hello World</title>
+    </header>
+    <body>
+        <h1>Try to communicate with Spring Server!</h1>
+        <label for="message">Enter message for server: </label><input type="text" id="message"/>
+        <input type="submit" value="Send" onclick="sendMessage()"/>
+    </body>
+</html>

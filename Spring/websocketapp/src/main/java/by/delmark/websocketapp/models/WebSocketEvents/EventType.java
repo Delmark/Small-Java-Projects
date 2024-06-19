@@ -1,0 +1,10 @@
+package by.delmark.websocketapp.models.WebSocketEvents;
+
+public enum EventType {
+    MESSAGE_POST,
+    CHAT_LIST_REQUEST,
+    CHAT_CONNECTION_REQUEST,
+    CHAT_LIST_RESPONSE,
+    MESSAGE_LIST_UPDATE_RESPONSE,
+    CHAT_CONNECTION_RESPONSE, ERROR_RESPONSE
+}

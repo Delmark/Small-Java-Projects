@@ -67,7 +67,7 @@ public class ChatWebSocketHandler implements WebSocketHandler {
                 session.sendMessage(new TextMessage(mapper.writeValueAsString(
                         new WebSocketEventResponse(
                                 EventType.CHAT_LIST_RESPONSE,
-                                mapper.writeValueAsString(chats))
+                                chats)
                         )));
             }
             case CHAT_CONNECTION_REQUEST -> {
@@ -95,7 +95,7 @@ public class ChatWebSocketHandler implements WebSocketHandler {
         session.sendMessage(new TextMessage(mapper.writeValueAsString(
                 new WebSocketEventResponse(
                         EventType.CHAT_CONNECTION_RESPONSE,
-                        mapper.writeValueAsString(chatMessages))
+                        chatMessages)
         )));
     }
 

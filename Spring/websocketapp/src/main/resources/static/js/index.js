@@ -38,14 +38,13 @@ socket.onerror = function (event) {
 }
 
 function handleChatListResponse(response) {
-    let chatList = response.payload.substring(1, response.payload.length - 1).split("},");
+    console.log(typeof response, typeof response.payload, response);
+    let chatList = response.payload;
 
     var chatListDiv = document.createElement("div");
     chatListDiv.setAttribute("class", "chat-list");
 
     for (let chatListItem of chatList) {
-        console.log(chatListItem);
-        chatListItem = JSON.parse(chatListItem);
         var chatListItemDiv = document.createElement("div");
         chatListItemDiv.setAttribute("class", "chat-list-item");
         chatListItemDiv.setAttribute("onclick", "openChat(" + chatListItem.chatId + ")");
@@ -57,20 +56,19 @@ function handleChatListResponse(response) {
 }
 
 function handleConnectionResponse(response) {
-    let messageArray = response.payload.substring(1, response.payload.length - 1).split("},");
+    let messageArray = response.payload;
+
+    let chatDiv = document.getElementById("chatBox");
+    document.getElementsByClassName("chat-list")[0].remove();
+    chatDiv.style.display = "flex";
 
     if (messageArray.length === 0) {
-        document.getElementById("messageBox").innerHTML = "Не найдено доступных чатов :(";
+        document.getElementById("messageBox").innerHTML = "Ещё никто не написал в этот чат, будьте первыми!";
     }
     else {
-        let chatDiv = document.getElementById("chatBox");
-        document.getElementsByClassName("chat-list")[0].remove();
-        chatDiv.style.display = "flex";
+        document.getElementById("messageBox").innerHTML = "";
         let messageListDiv = document.getElementById("message-list");
-
         for (let message of messageArray) {
-            console.log(message + "}");
-            message = JSON.parse(message + "}");
             let messageDiv = document.createElement("div");
             messageDiv.setAttribute("class", "message");
             messageDiv.innerHTML = "Anonymus: " + message.messageText;

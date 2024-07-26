@@ -1,0 +1,41 @@
+services:
+
+  my-app:
+    image: demo:0.1.0-SNAPSHOT
+    container_name: my-app
+    restart: always
+    networks:
+      - default
+    ports:
+      - "8080:8080"
+
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: loki
+    networks:
+      - default
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus:/etc/prometheus/
+    networks:
+      - default
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    networks:
+      - default
+    volumes:
+      - ./config/grafana:/etc/grafana/provisioning/datasources
+    ports:
+      - "3000:3000"
+
+networks:
+  default:

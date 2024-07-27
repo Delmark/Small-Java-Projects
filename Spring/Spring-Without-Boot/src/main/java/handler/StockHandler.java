@@ -1,10 +1,11 @@
-package handler.response;
+package handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import handler.requests.Stock;
+import handler.response.ErrorResponse;
 import models.StoreStock;
 import org.springframework.stereotype.Component;
 import service.StockService;
